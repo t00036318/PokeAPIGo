@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_fight"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="van.pokeapigo.fight">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/name2"
+        android:fontFamily="casual"
+        android:textSize="14sp"
+        android:layout_toStartOf="@+id/img2" />
+
+    <com.android.volley.toolbox.NetworkImageView
+        android:layout_width="175dp"
+        android:layout_height="250dp"
+        android:id="@+id/img1"
+        android:layout_below="@+id/name1"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="15dp" />
+
+    <com.android.volley.toolbox.NetworkImageView
+        android:layout_width="175dp"
+        android:layout_height="250dp"
+        android:id="@+id/img2"
+        android:layout_alignTop="@+id/img1"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/img1"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/name1"
+        android:fontFamily="casual"
+        android:textSize="14sp"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/name2" />
+
+</RelativeLayout>
