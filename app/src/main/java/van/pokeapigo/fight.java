@@ -1,8 +1,10 @@
 package van.pokeapigo;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import java.util.Random;
@@ -30,11 +32,8 @@ public class fight extends AppCompatActivity {
     ImageLoader imageLoader;
     int pv1 = 100, pv2 = 100;
     boolean turno = false;
-    int UPDATE_INTERVAL = 1500;
-    String name_u1, name_u2;
-    String URL_NAME = "http://pokeapi.co/api/v2/pokemon/";
+    String URL_NAME = "https://pokeapi.co/api/v2/pokemon/";
     RequestQueue queue;
-
 
 
     @Override
@@ -65,6 +64,10 @@ public class fight extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            if (pv1 <= 0 || pv2 <= 0){
+                                timer.cancel();
+                                changeActv();
+                            }
                             if (!turno) {
                                 pv1 = puntosV(pv1, pv_1);
 
@@ -73,18 +76,23 @@ public class fight extends AppCompatActivity {
                                 pv2 = puntosV(pv2, pv_2);
                             }
                             turno = !turno;
-                            if (pv1 <= 0 || pv2 <= 0){
-                                timer.cancel();
-                            }
                         }
                     });
                 }
-            }, 2000, UPDATE_INTERVAL);
+            }, 4000, 1800);
+
+        setNames(name1, random1);
+        setNames(name2, random2);
 
 
-        setNames(name_u1, name1);
-        setNames(name_u2, name2);
+
     }
+
+    public void changeActv(){
+        Intent startNewActivity = new Intent(this, winOrLose.class);
+        startActivity(startNewActivity);
+    }
+
 
     private int getCompetitor1() {
         Random rand = new Random();
@@ -102,8 +110,6 @@ public class fight extends AppCompatActivity {
         String urlbase = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/";
         String url = urlbase + random1 + ".png";
         String url2 = urlbase + random2 + ".png";
-        name_u1 = URL_NAME + random1 + "/";
-        name_u2 = URL_NAME + random2 + "/";
 
         setImage(url, iv1);
         setImage(url2, iv2);
@@ -135,7 +141,9 @@ public class fight extends AppCompatActivity {
         return pv;
     }
 
-    private void setNames(String url, final TextView tv){
+    private void setNames(final TextView tv, int random){
+        String url = URL_NAME + random + "/";
+
         queue = Volley.newRequestQueue(this);
 
         JsonObjectRequest obreq = new JsonObjectRequest(Request.Method.GET, url, null,
