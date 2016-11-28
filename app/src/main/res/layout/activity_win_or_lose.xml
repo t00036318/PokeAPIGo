@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_win_or_lose"
     android:layout_width="match_parent"
@@ -10,4 +11,34 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="van.pokeapigo.winOrLose">
 
+
+    <com.android.volley.toolbox.NetworkImageView
+        android:layout_width="140dp"
+        android:layout_height="150dp"
+        android:id="@+id/img"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="Comenzar nueva partida"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/start"
+        android:layout_marginTop="31dp"
+        android:onClick="newGame"
+        android:layout_below="@+id/img"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/wOL"
+        android:fontFamily="casual"
+        android:textSize="22sp"
+        android:textAllCaps="true"
+        android:textAlignment="center"
+        android:textStyle="normal|bold"
+        android:layout_above="@+id/img"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="12dp" />
 </RelativeLayout>

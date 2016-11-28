@@ -26,14 +26,18 @@ import org.json.JSONObject;
 
 public class fight extends AppCompatActivity {
 
-    int random1 = 0, random2 = 0;
-    private NetworkImageView iv1;
-    private NetworkImageView iv2;
+    int random1 = 0, random2 = 0, pv1 = 100, pv2 = 100, winner = 0;
+
+    private NetworkImageView iv1, iv2;
+
     ImageLoader imageLoader;
-    int pv1 = 100, pv2 = 100;
+
     boolean turno = false;
+
     String URL_NAME = "https://pokeapi.co/api/v2/pokemon/";
+
     RequestQueue queue;
+
 
 
     @Override
@@ -55,6 +59,8 @@ public class fight extends AppCompatActivity {
         while (random2 == random1){
             random2 = getCompetitor2();
         }
+        setNames(name1, random1);
+        setNames(name2, random2);
         loadImage(random1, random2);
 
         final Timer timer = new Timer();
@@ -65,6 +71,11 @@ public class fight extends AppCompatActivity {
                         @Override
                         public void run() {
                             if (pv1 <= 0 || pv2 <= 0){
+                                if (pv1 <= 0){
+                                    winner = 0;
+                                } else{
+                                    winner = 1;
+                                }
                                 timer.cancel();
                                 changeActv();
                             }
@@ -81,16 +92,17 @@ public class fight extends AppCompatActivity {
                 }
             }, 4000, 1800);
 
-        setNames(name1, random1);
-        setNames(name2, random2);
-
-
 
     }
 
     public void changeActv(){
         Intent startNewActivity = new Intent(this, winOrLose.class);
+        Bundle b = new Bundle();
+        b.putInt("random1", random1);
+        b.putInt("winner", winner);
+        startNewActivity.putExtras(b);
         startActivity(startNewActivity);
+        finish();
     }
 
 
